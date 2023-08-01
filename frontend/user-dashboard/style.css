@@ -30,13 +30,14 @@ body{
 }
 .alerts{
     border: 1px solid rgb(43, 53, 80);
-    padding: 10px;
+    padding: 20px;
     border-radius: 10px;
     width: 25vw;
     color: #01081e;
     text-align: center;
     font-size: 20px;
     background-color: #c8d6fe;
+    margin-top: 2vh;
 }
 
 
@@ -73,6 +74,8 @@ body{
     font-size: 20px;
 }
 
+
+
 .projectDesc{
     grid-area: projectDesc;
     border: 2px solid black;
@@ -80,7 +83,64 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    position:relative;
+
 }
+.modalContainer{
+    display: none;
+}
+
+.modal {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+    width: 55vw;
+    height: 95vh;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+  }
+  .modal-content{
+    width: 30vw;
+    height: 40vh;
+    margin-top: 2vh;
+    background-color: #c8d6fe;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+  }
+  .modal-content form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap:5vh;
+    padding: 1vh 2vw;
+    
+  }
+  .form-control {
+    width: 25vw;
+    height: 5vh;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid rgb(128, 128, 128,0.4);
+    border-radius: 5px;
+    background-color: transparent;
+    color:#01081e;
+}
+.text-area{
+    width: 25vw;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid rgb(128, 128, 128,0.4);
+    border-radius: 5px;
+    background-color: transparent;
+    color:#01081e
+
+}
+
 
 .projectContainer {
     color: #2b3550 ;
