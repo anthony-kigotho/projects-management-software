@@ -5,18 +5,18 @@
     justify-content: center;
     align-items: center;
     background-color: #DCE5FE;
-    min-width: 600px;
+    min-width: 500px;
 }
 
 
 .main{
     /* border-style: solid; */
-    width: 80vw;
+    width: 60vw;
 display: flex;
 flex-direction: row;
 justify-content: space-evenly;
 height: 70vh;
-min-width: 600px;
+/* min-width: 600px; */
 
 }
 
@@ -87,7 +87,8 @@ button{
 .mainFooter{
     display: flex;
     flex-direction: column;
-    gap: 15px;min-width: 600px;
+    gap: 15px;
+    min-width: 600px;
 }
 .regLink{
     display: flex;
@@ -117,5 +118,21 @@ button{
     .submitBtn{
         width: 100px;
     }
+}
+@media(max-width:700px){
+   body{
+    background-color:#DCE5FE;
+   }
+   .main{
+    max-width: 100%;
+    margin: 1;
+    height: 100%;
+   }
+   .app{
+    width: 100%;
+    margin: 1;
+     overflow-x: hidden;
+   }
+  
 }
 
