@@ -1,0 +1,121 @@
+.app{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DCE5FE;
+    min-width: 600px;
+}
+
+
+.main{
+    /* border-style: solid; */
+    width: 80vw;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+height: 70vh;
+min-width: 600px;
+
+}
+
+.loginDiv{
+    border-style:hidden;
+    width: 30vw;
+    border-radius: 10px;
+    border-width: 3px;
+    box-shadow: 0 0 20px rgba(0,0 ,0 ,2 );
+    min-width: 600px;
+
+    
+}
+.loginDiv >div{
+    /* margin-left: 10px; */
+    padding-left: 15px;
+    min-width: 600px;
+}
+
+.mainloginForm{
+    /* border-style: solid; */
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+}
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+    /* gap: 0px; */
+}
+.userName{
+    font-size: 19px;
+    height: 5vh;
+    border-radius: 5px;
+width: 85%;
+background-color: #DCE5FE;
+/* min-width: 300px; */
+}
+.userPass{
+    font-size: 19px;
+    /* border-style: none; */
+    height: 5vh;
+    border-radius: 5px;
+    width: 85%;
+    background-color: #DCE5FE;
+    /* min-width: 300px; */
+}
+
+.formFooter{
+    /* border-style: solid; */
+    display: flex;
+    justify-content: space-around;min-width: 600px;
+}
+.submitBtn{
+    display: flex;
+    justify-content: center;
+    /* min-width: 300px; */
+}
+button{
+    height: 5vh;
+    width: 90%;
+    background-color: #2B3550;
+    color: white;
+    border-radius: 10px;
+    /* min-width: 100px; */
+}
+.mainFooter{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;min-width: 600px;
+}
+.regLink{
+    display: flex;
+    justify-content: center;min-width: 600px;
+}
+.engDiv{
+    display: flex;
+    /* border-style: solid; */
+    /* width: 50%; */
+    justify-content: center;
+    min-width: 600px;
+    
+}
+
+.engDiv img{
+    height: 100%;
+    width: 31vw;
+}
+
+@media(max-width:1200px){
+    .engDiv{
+        display: none;
+    }
+}
+
+@media (max-width:1200px){
+    .submitBtn{
+        width: 100px;
+    }
+}
+
