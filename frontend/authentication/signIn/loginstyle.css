@@ -1,3 +1,7 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
 .app{
     height: 100vh;
     width: 100vw;
@@ -40,29 +44,36 @@ height: 70vh;
     /* border-style: solid; */
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4vh;
     min-width: 600px;
+    margin-left: 2vw;
 }
 .loginForm{
     display: flex;
     flex-direction: column;
+    gap: 2vh;
     min-width: 600px;
     /* gap: 0px; */
 }
 .userName{
     font-size: 19px;
-    height: 5vh;
-    border-radius: 5px;
-width: 85%;
-background-color: #DCE5FE;
+    height: 6vh;
+    border-radius: 12px;
+    width: 85%;
+    padding: 0vh 2vw;
+    background-color: #DCE5FE;
 /* min-width: 300px; */
 }
 .userPass{
     font-size: 19px;
     /* border-style: none; */
-    height: 5vh;
-    border-radius: 5px;
+    height: 6vh;
+    border-radius: 12px;
     width: 85%;
     background-color: #DCE5FE;
+    padding: 0vh 2vw;
     /* min-width: 300px; */
 }
 
@@ -78,7 +89,7 @@ background-color: #DCE5FE;
 }
 button{
     height: 5vh;
-    width: 90%;
+    width: 85%;
     background-color: #2B3550;
     color: white;
     border-radius: 10px;
@@ -98,14 +109,33 @@ button{
     display: flex;
     /* border-style: solid; */
     /* width: 50%; */
-    justify-content: center;
+    justify-content: space;
     min-width: 600px;
     
 }
 
 .engDiv img{
     height: 100%;
-    width: 31vw;
+    width: 30vw;
+}
+
+.btn-primary {
+    background-color: #2b3550;
+    width: 90%;
+    height: 6vh;
+    color: #dce5fe;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.5s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color:#c8d6fe;
+    border: 1px solid rgb(43, 53, 80);
+    color:  rgb(43, 53, 80);
 }
 
 @media(max-width:1200px){
