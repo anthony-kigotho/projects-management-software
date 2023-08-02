@@ -1,4 +1,4 @@
-CREATE PROCEDURE updateUser
+CREATE OR ALTER PROCEDURE updateUser
     @email VARCHAR(250),
     @userName VARCHAR(250),
     @password VARCHAR(250),
@@ -8,7 +8,6 @@ CREATE PROCEDURE updateUser
     AS BEGIN
 
     UPDATE userTable SET 
-    email =COALESCE (@email,email), 
     userName = COALESCE (@userName,userName),
     password = COALESCE (@password,password), 
     about = COALESCE (@about,about),
