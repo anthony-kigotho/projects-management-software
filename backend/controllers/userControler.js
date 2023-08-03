@@ -1,14 +1,17 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const DB = require('../database/dbHelpers');
+const {v4} = require('uuid');
 const {StatusCodes} = require('http-status-codes');
 
 const createUser = async (req, res, next) => {
 
+        const id = v4();
         const {username , email , password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 5);
 
         const requestBody = {
+            id,
             username,
             email,
             password: hashedPassword

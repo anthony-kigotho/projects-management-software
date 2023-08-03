@@ -5,34 +5,50 @@ const {StatusCodes} = require('http-status-codes');
 
 const loginUser = async (req, res, next) => {
     
-        const {email, password} = req.body;
     
-        try {
-            const user = await DB.executeProcedure('getUserByEmail',email);
-    
-            if(!user) {
-                res.status(StatusCodes.NOT_FOUND).json({message: 'User not found'});
-                throw new Error('User not found');
-            }
-    
-            const isMatch = await bcrypt.compare(password, user.password);
-    
-            if(!isMatch) {
-                res.status(StatusCodes.UNAUTHORIZED).json({message: 'Invalid credentials'});
-                throw new Error('Invalid credentials');
-            }
+    try {
 
-            const {password , ...payload} = user;
+        const {email, password} = req.body
+
     
-            const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1h'});
-            res.status(StatusCodes.OK).json({message:'login successful' ,token , payload});
+        const user = await (await DB.executeProcedure('userLogin',{email})).recordset[0]
+        console.log(user)
     
     
-        } catch (error) {
-            console.log(error)
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: 'Something went wrong in the server'})
+    
+        if(user){
+            const hashedPassword = await user.password
+    
+            const isMatch = await bcrypt.compare(password, hashedPassword)
+    
+            if (isMatch){
+    
+                const {password, ...payload} = user
+    
+                const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1h'})
+                res.status(StatusCodes.OK)
+    
+                res.json({message:"login successful",token})
+    
+            }else{
+                res.status(StatusCodes.UNAUTHORIZED)
+    
+                res.json({message:"login failed , invalid credentials"})
+    
+            }
+    
         }
-};
+    
+    
+        
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
+    };
+    
+
 
 
 

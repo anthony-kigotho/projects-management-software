@@ -89,9 +89,10 @@ body{
         border: 1px solid rgb(43, 53, 80);
         color:  rgb(43, 53, 80);
     }
-    .loginLink{
+    .link{
         cursor: pointer;
         color:#6d41ac;
+        font-size: 20px;
     }
 
 
