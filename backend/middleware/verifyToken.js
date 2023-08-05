@@ -12,7 +12,9 @@ const verifyToken = async (req, res, next) => {
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
         req.info = decodedData;
-        res.status(StatusCodes.OK).json({message:"Authorized"})
+        // calling the next middleware function
+        next()
+    //    return  res.status(StatusCodes.OK).json({message:"Authorized"})
         
     } catch (error) {
         console.log(error)
@@ -20,9 +22,8 @@ const verifyToken = async (req, res, next) => {
         
 
     }
-    // calling the next middleware function
     
-    next()
+    
 }
 
 module.exports = {

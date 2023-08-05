@@ -12,6 +12,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+ 
 }
 .hide{
     display: none;
@@ -19,6 +20,17 @@ body{
 .formHeader{
     text-decoration: underline;
     font-size: 40px;
+}
+.alerts{
+    margin-top: 2vh;
+    border: 1px solid rgb(43, 53, 80);
+    padding: 10px;
+    border-radius: 10px;
+    width: 25vw;
+    color: #01081e;
+    text-align: center;
+    font-size: 20px;
+    background-color: #c8d6fe;
 }
 
 .mainContainer{
@@ -28,8 +40,9 @@ body{
     /* border : 2px solid green; */
     justify-content: center;
     align-items: center;
-    gap: 2vh;
+    gap: 1vh;
     color: #2b3550;
+ 
 }
 
 .registerContainer{

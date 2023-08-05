@@ -1,10 +1,11 @@
 CREATE OR ALTER PROCEDURE updateUser
-    @email VARCHAR(250),
-    @userName VARCHAR(250),
-    @password VARCHAR(250),
-    @about VARCHAR(500),
-    @isAssigned Bit,
-    @profile_pic VARCHAR(500)
+    @id VARCHAR(255),
+    @email VARCHAR(250) = NULL,
+    @userName VARCHAR(250) = NULL,
+    @password VARCHAR(250) = NULL,
+    @about VARCHAR(500) = NULL,
+    @isAssigned Bit = NULL,
+    @profile_pic VARCHAR(500) = NULL
     AS BEGIN
 
     UPDATE userTable SET 
@@ -14,5 +15,5 @@ CREATE OR ALTER PROCEDURE updateUser
     isAssigned = COALESCE (@isAssigned,isAssigned),
     profile_pic = COALESCE (@profile_pic,profile_pic)
     
-    WHERE email = @email
+    WHERE id = @id
     END;

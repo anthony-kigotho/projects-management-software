@@ -5,11 +5,13 @@ CREATE OR ALTER PROCEDURE addUser
     @id VARCHAR(255),
     @email VARCHAR(255),
     @userName VARCHAR(255),
-    @password VARCHAR(255)
+    @password VARCHAR(255),
+    @role VARCHAR(20) = NULL
 
 AS BEGIN 
 
-INSERT INTO userTable (id,email, userName,password) 
+INSERT INTO userTable (id,email, userName,password , role) 
 
-VALUES (@id,@email,@userName,@password)
+VALUES (@id,@email,@userName,@password,@role)
 END;
+

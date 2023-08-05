@@ -1,7 +1,7 @@
 
 
 CREATE OR ALTER PROCEDURE getOneUser
-    @email VARCHAR(255)
+    @id VARCHAR(255)
 AS BEGIN
-SELECT * FROM userTable WHERE email = @email
+SELECT * FROM userTable WHERE id = @id
 END;
