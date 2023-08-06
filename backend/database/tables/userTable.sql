@@ -12,8 +12,8 @@ BEGIN TRY
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         
 
-        ALTER TABLE userTable
-        ADD CONSTRAINT FK_userTable_projectTable FOREIGN KEY (project_Id) REFERENCES projectTable(id) ON DELETE SET NULL;   
+        -- ALTER TABLE userTable
+        -- ADD CONSTRAINT FK_userTable_projectTable FOREIGN KEY (project_Id) REFERENCES projectTable(id) ON DELETE SET NULL;   
      );
 END TRY
 BEGIN CATCH

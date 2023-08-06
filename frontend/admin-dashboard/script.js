@@ -135,17 +135,18 @@ const fetchProjects = async () => {
 
     const projects = await data.projects
 
+
     let html = ``
 
     projects.map((project)=>{
         html += `
-        <div class="projectContainer" id=${project.id}>
+        <div class=${project.isAssigned ? "asigned" : "projectContainer" } id=${project.id}>
         <h3>${project.project_name}</h3>
         <p>${project.project_description}</p>
         <p>${project.created_at}</p>
         <div class="actions">
         <button class="action-btn-update">Update</button>
-        <button class="action-btn">Assign</button>
+        <button class="action-btn"  >Assign</button>
         <button class="action-btn-delete">Delete</button>
         </div> 
         </div>
@@ -201,6 +202,10 @@ projectList.addEventListener('click', async(e)=>{
             alerts.innerHTML =''
         },3000)
         await fetchProjects()
+    }
+    if(e.target.classList.contains('action-btn')){
+        const id = e.target.parentElement.parentElement.id
+        window.location.href = `../admin-dashboard/assign/index.html?id=${id}`
     }
 
 })

@@ -48,6 +48,7 @@ const getProject = async (req, res) => {
 const updateProject = async (req,res) => {
     const {id} = req.params;
 
+
     try {
         await DB.executeProcedure('updateProject', {...req.body, id})
         return res.status(StatusCodes.OK).json({msg: "Project updated successfully"})
@@ -81,13 +82,35 @@ const completeProject = async (req, res) => {
     }   
 }
 
+// make a project to be assigned to a user
+const assignProject = async (req , res )=>{
+    const {id} = req.params;
+    const {user_id , deadline} = req.body;
+
+    const updateUserDetails = {
+        id:user_id,
+        project_Id:id
+    }
+    console.log(updateUserDetails)
+
+    try {
+        await DB.executeProcedure('assignUserProject',updateUserDetails)
+        await DB.executeProcedure('assignProject', {id, user_id , deadline})
+        return res.status(StatusCodes.OK).json({msg: "Project assigned successfully"})
+    } catch (error) {
+        console.log(error)
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg: "Server Error"})
+    }   
+}
+
 module.exports = {
     createProject,
     getProjects,
     getProject ,
     updateProject,
     deleteProject,
-    completeProject
+    completeProject,
+    assignProject
 
     
 }

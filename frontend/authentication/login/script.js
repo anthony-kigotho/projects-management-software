@@ -1,7 +1,7 @@
 const logForm = document.querySelector("#loginForm");
 console.log(logForm)
 
-const alerts = document.querySelector(".alerts");
+const alerts = document.querySelector(".alertsContainer");
 
 const email = document.querySelector('.email')
 const password = document.querySelector('.password')
@@ -20,7 +20,10 @@ const checkLoginInputs = () => {
     const emailValue = email.value.trim();
     const passwordValue = password.value.trim();
         if(emailValue.length == 0 || passwordValue.length ==0) {
-             alerts.innerHTML = "Please fill in all fields"
+            alerts.innerHTML = ` <div class="alerts">Please fill in all fields</div>`
+            setTimeout(() => {
+                alerts.innerHTML = ''
+            }, 3000);
         }else{
             user = {
                 email: email.value,
@@ -50,7 +53,9 @@ logForm.addEventListener('submit', async(e) => {
         const data = await res.json()
         console.log(data)
         const token = data?.token
-        alerts.innerHTML = data?.message
+        alerts.innerHTML =`
+        <div class="alerts"> ${data?.message}</div>
+        `
         //store the token in local storage 
         localStorage.setItem('token', token)
         if(localStorage.getItem('token')){
@@ -64,16 +69,21 @@ logForm.addEventListener('submit', async(e) => {
                 }
             })
 
-            const data = await res.json()
+            setTimeout(async()=>{
 
+                
+                            const data = await res.json()
+                            alerts.innerHTML =``
+                
+                            if(data?.loggedInUser.role == 'admin'){
+                                window.location.href = "../../admin-dashboard/index.html"
+                            }
+                
+                            if(data?.loggedInUser.role == 'user'){
+                                window.location.href = "../../user-dashboard/index.html"
+                            }
 
-            if(data?.loggedInUser.role == 'admin'){
-                window.location.href = "../../admin-dashboard/index.html"
-            }
-
-            if(data?.loggedInUser.role == 'user'){
-                window.location.href = "../../user-dashboard/index.html"
-            }
+            },2000)
 
         }
     

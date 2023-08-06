@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE assignProject
+CREATE OR ALTER PROCEDURE assignUserProject
     @id VARCHAR(250),
     @project_Id VARCHAR(250)
     AS BEGIN

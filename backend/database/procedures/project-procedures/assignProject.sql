@@ -1,7 +1,7 @@
 CREATE OR ALTER PROCEDURE assignProject
     @id VARCHAR(250),
     @user_Id VARCHAR(250),
-    @deadline DATETIME
+    @deadline DATE
     AS BEGIN
 
         UPDATE projectTable
