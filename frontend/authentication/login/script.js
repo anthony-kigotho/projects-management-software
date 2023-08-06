@@ -69,18 +69,21 @@ logForm.addEventListener('submit', async(e) => {
                 }
             })
 
+            const data = await res.json()
+
+            const userId = data.loggedInUser.id
+
             setTimeout(async()=>{
 
                 
-                            const data = await res.json()
                             alerts.innerHTML =``
                 
                             if(data?.loggedInUser.role == 'admin'){
-                                window.location.href = "../../admin-dashboard/index.html"
+                                window.location.href = `../../admin-dashboard/index.html?id=${userId}`
                             }
                 
                             if(data?.loggedInUser.role == 'user'){
-                                window.location.href = "../../user-dashboard/index.html"
+                                window.location.href = `../../user-dashboard/index.html?id=${userId}`
                             }
 
             },2000)
@@ -93,6 +96,7 @@ logForm.addEventListener('submit', async(e) => {
         
     }
 })
+
 
 
 

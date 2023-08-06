@@ -9,8 +9,8 @@ BEGIN TRY
         deadline DATETIME NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         
-        ALTER TABLE projectTable
-        ADD CONSTRAINT FK_projectTable_userTable FOREIGN KEY (user_Id) REFERENCES userTable(id) ON DELETE SET NULL;
+        -- ALTER TABLE projectTable
+        -- ADD CONSTRAINT FK_projectTable_userTable FOREIGN KEY (user_Id) REFERENCES userTable(id) ON DELETE SET NULL;
 
     );
 END TRY

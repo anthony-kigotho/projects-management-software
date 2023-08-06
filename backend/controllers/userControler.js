@@ -72,12 +72,44 @@ const getOneUser = async (req, res, next) => {
 }
 const getProjectAssigned = async = async(req, res, next) => {
     try {
-        const projects = (await DB.executeProcedure('getProjectAssigned')).recordset;
-        return res.status(StatusCodes.OK).json({projects})
+        const {id} = req.params
+        const project = (await DB.executeProcedure('getProjectAssigned',{id})).recordset[0];
+        return res.status(StatusCodes.OK).json({project})
     } catch (error) {
         console.log(error)
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg: "Server Error"}) 
     }
+}
+
+const completeProject = async = async(req, res, next) => {
+
+    const {id} = req.params;
+    const {project_Id} = req.body;
+
+    try {
+         const userUpdateDetails = {
+            id,
+            project_Id:null,
+            isAssigned:0,       
+         }
+         const projectUpdateDetails = {
+            id:project_Id,
+            completed:1,
+         }
+
+           await DB.executeProcedure('updateUser', userUpdateDetails);
+
+           await DB.executeProcedure('updateProject', projectUpdateDetails);
+
+           res.status(StatusCodes.OK).json({message: 'Project completed successfully'});
+                   
+    } catch (error) {
+        console.log(error)
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg: "Server Error"})
+        
+    }
+
+
 }
 
 
@@ -91,5 +123,6 @@ module.exports = {
     updateUser,
     deleteUser,
     getOneUser,
-    getProjectAssigned
+    getProjectAssigned,
+    completeProject
 }

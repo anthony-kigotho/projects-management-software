@@ -6,7 +6,7 @@ CREATE OR ALTER PROCEDURE addUser
     @email VARCHAR(255),
     @userName VARCHAR(255),
     @password VARCHAR(255),
-    @role VARCHAR(20) = NULL
+    @role VARCHAR(20) = 'user'
 
 AS BEGIN 
 
