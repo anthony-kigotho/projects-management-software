@@ -38,9 +38,9 @@ const checkLoginInputs = () => {
 logForm.addEventListener('submit', async(e) => {
     e.preventDefault(e)
     try {
-
+        
         checkLoginInputs()
-
+        
         const res = await fetch('http://localhost:5000/api/v1/users/login', {
             method: 'POST',
             headers: {
@@ -51,7 +51,6 @@ logForm.addEventListener('submit', async(e) => {
         })
 
         const data = await res.json()
-        console.log(data)
         const token = data?.token
         alerts.innerHTML =`
         <div class="alerts"> ${data?.message}</div>
@@ -70,8 +69,9 @@ logForm.addEventListener('submit', async(e) => {
             })
 
             const data = await res.json()
+            console.log(data)
 
-            const userId = data.loggedInUser.id
+            const userId = data?.loggedInUser?.id
 
             setTimeout(async()=>{
 

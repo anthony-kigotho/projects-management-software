@@ -71,10 +71,11 @@ try {
 
     const data = await res.json()
     const users = data.users 
+    console.log(users)
 
-    users.forEach(user => {
+    users.map(user => {
         html += `
-        <li><a href="#" class=${user?.isAssigned?'asigned':'user'}  id=${user.id} >${user.userName}</a></li>
+        <li><a href="#" class=${user?.isAssigned?'asigned':'user'} name=${user.userName} id=${user.id} >${user.userName}</a></li>
         `
     })
 
@@ -93,12 +94,7 @@ try {
 }
 }
 
-const assignUser = async ()=>{
 
-
-
-
-}
 
 projectContainer.addEventListener('click', async(e)=>{
 
@@ -125,12 +121,12 @@ projectContainer.addEventListener('click', async(e)=>{
                 body: JSON.stringify(assignDetails)
     
             })
-            const data =await res.json()
+            const data = await res.json()
     
             console.log(data)
     
             alerts.innerHTML = `
-            <div class="alerts">${data.msg}</div>
+            <div class="alerts">${data.msg} . An email has been sent to ${e.target.name} </div>
             `
             setTimeout(()=>{
                 alerts.innerHTML =''
@@ -141,7 +137,7 @@ projectContainer.addEventListener('click', async(e)=>{
 
               
             alerts.innerHTML = `
-            <div class="alerts">${data.msg}</div>
+            <div class="alerts">${error.message}</div>
             `
             setTimeout(()=>{
                 alerts.innerHTML =''

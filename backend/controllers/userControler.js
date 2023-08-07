@@ -11,11 +11,6 @@ const createUser = async (req, res, next) => {
         const {password,...payload } = req.body;
         const hashedPassword = await bcrypt.hash(password, 5);
 
-        // const {error} = registerSchema.validate(req.body)
-
-        // if(error){
-        //     return res.status(422).json(error.details)
-        // }
         console.log({...payload,password:hashedPassword,id})
     try {
 

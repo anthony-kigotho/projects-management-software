@@ -20,9 +20,6 @@ const loginUser = async (req, res, next) => {
     
         const user = await (await DB.executeProcedure('userLogin',{email})).recordset[0]
         console.log(user)
-    
-    
-    
         if(user){
             const hashedPassword = await user.password
     
@@ -44,10 +41,12 @@ const loginUser = async (req, res, next) => {
     
             }
     
-        }
+        }else{
+            res.status(StatusCodes.UNAUTHORIZED)
     
-    
-        
+            res.json({message:" You are not registered , please register first"})
+
+        }     
     } catch (error) {
         console.log(error)
     }

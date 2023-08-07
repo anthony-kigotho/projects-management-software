@@ -1,5 +1,6 @@
 const {v4} = require('uuid');
 const {StatusCodes} = require('http-status-codes');
+const {sendMail} = require('../email-service/sendMail')
 const DB = require('../database/dbHelpers');
 
 
@@ -87,15 +88,26 @@ const assignProject = async (req , res )=>{
     const {id} = req.params;
     const {user_id , deadline} = req.body;
 
+    const project = (await DB.executeProcedure('getProject', {id})).recordset[0]
+    const user = (await DB.executeProcedure('getOneUser', {id:user_id})).recordset[0]
+
     const updateUserDetails = {
         id:user_id,
         project_Id:id
     }
     console.log(updateUserDetails)
 
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: `${user.email}`,
+        subject: 'Hello from Nodemailer',
+        text: `Hello ${user.userName}, you have been assigned to a project "${project.project_name}" with a deadline of ${deadline} \n\n\ regards, \n\n\ Project Manager`,
+      };
+
     try {
         await DB.executeProcedure('assignUserProject',updateUserDetails)
         await DB.executeProcedure('assignProject', {id, user_id , deadline})
+        await sendMail(mailOptions)
         return res.status(StatusCodes.OK).json({msg: "Project assigned successfully"})
     } catch (error) {
         console.log(error)

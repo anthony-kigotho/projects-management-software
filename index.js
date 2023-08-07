@@ -15,11 +15,22 @@ app.use((err, req, res, next)=>{
     res.json({Error: err})
 })
 
+// Enable CORS for all routes
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // You can replace * with specific origins
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
+
 
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/projects', projectRouter)
+
 
 app.listen(process.env.PORT, async() => {
     await dbConnection()
     console.log(`Server is running on port ${process.env.PORT}`)
 })
+
+

@@ -38,3 +38,6 @@ const dbConnection = async ()=>{
 // export the sqlconfig 
 module.exports = { sqlConfig, dbConnection}
 
+
+
+
