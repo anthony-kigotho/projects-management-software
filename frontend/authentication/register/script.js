@@ -2,7 +2,7 @@
 const regForm = document.querySelector("#registerForm");
 console.log(regForm);
 
-const alerts = document.querySelector(".alerts");
+const alerts = document.querySelector(".alertContainer");
 
 
 
@@ -13,6 +13,7 @@ const email = document.querySelector('.email')
 const password = document.querySelector('.password')
 const password2 = document.querySelector('.password2')
 const form = document.querySelector('.form')
+
 
 
 
@@ -29,7 +30,11 @@ const checkRegisterInputs = () => {
         alerts.innerHTML = "Please fill in all fields"
         }else{
         if (passwordValue !== password2Value) {
-            alert.innerHTML = "Passwords do not match";
+            let html = `<div class="alerts"> passwords do not match </div>`
+            alerts.innerHTML = html;
+            setTimeout(()=>{
+              alerts.innerHTML = ''
+            },2000)
 
         }else{
 
@@ -61,11 +66,20 @@ regForm.addEventListener('submit', async (e) => {
           })
 
           const data = await res.json()
-          alerts.innerHTML = data?.message??'something went wrong';
-          window.location.href = "../login/login.html"
+           let html = `<div class="alerts"> ${data?.message??'something went wrong'}</div>`
+          alerts.innerHTML = html;
+          setTimeout(()=>{
+            alerts.innerHTML = ''
+            window.location.href = "../login/login.html"
+          },2000)
         
     } catch (error) {
         console.log(error)
+        let html = `<div class="alerts"> ${error.message}</div>`
+        alerts.innerHTML = html;
+        setTimeout(()=>{
+          alerts.innerHTML = ''
+        },2000)
         
     }
 

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const DB = require('../database/dbHelpers');
 const {v4} = require('uuid');
 const {StatusCodes} = require('http-status-codes');
+// import {registerSchema } from '../validators/inputFields';
 
 const createUser = async (req, res, next) => {
 
@@ -10,8 +11,11 @@ const createUser = async (req, res, next) => {
         const {password,...payload } = req.body;
         const hashedPassword = await bcrypt.hash(password, 5);
 
+        // const {error} = registerSchema.validate(req.body)
 
-
+        // if(error){
+        //     return res.status(422).json(error.details)
+        // }
         console.log({...payload,password:hashedPassword,id})
     try {
 

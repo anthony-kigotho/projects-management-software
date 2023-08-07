@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const DB = require('../database/dbHelpers');
 const {StatusCodes} = require('http-status-codes');
+// const {loginSchema} = require('../validators/inputFields')
 
 const loginUser = async (req, res, next) => {
     
@@ -9,6 +10,12 @@ const loginUser = async (req, res, next) => {
     try {
 
         const {email, password} = req.body
+
+            // const {error} = loginSchema.validate(req.body)
+
+            // if(error){
+            // return res.status(422).json(error.details)
+            // }
 
     
         const user = await (await DB.executeProcedure('userLogin',{email})).recordset[0]
@@ -56,10 +63,6 @@ const loginUser = async (req, res, next) => {
         }
 
     }
-    
-
-
-
 
 module.exports = {
     loginUser,

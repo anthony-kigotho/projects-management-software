@@ -5,17 +5,22 @@ const projectContainer = document.querySelector('.projectContainer')
 const checkbox1 = document.querySelector('#checkbox1')
 const checkbox2 = document.querySelector('#checkbox2')
 const checkbox3 = document.querySelector('#checkbox3')
+const alerts= document.querySelector('.alertContainer')
 console.log(checkbox1 , checkbox2 , checkbox3) 
 const completeBtn = document.querySelector('#completeBtn')
 const tasks = document.querySelector('.tasks')
 const profileName = document.querySelector('.profileName')
 
 let userId = ''
+let project =''
 
 window.onload = async () => {
     await fetchAssignedProject();
     await getLoggedInUser()
 }
+
+
+
 
 const getLoggedInUser = async () => {
     // getuser by id
@@ -33,7 +38,7 @@ const getLoggedInUser = async () => {
     
     const data = await res.json()
     const user = data?.user[0];
-    profileName.innerHTML = user.userName
+    profileName.innerHTML = user?.userName
 }
 
 
@@ -48,9 +53,9 @@ const res = await fetch(`http://localhost:5000/api/v1/users/getProjectAssigned/$
 })
 const data = await res.json();
 
-const project = await data?.project;
+ project = await data?.project;
 
-userId = project.user_Id;
+userId = project?.user_Id;
 
 // console.log(userId)
 
@@ -87,7 +92,7 @@ checkbox1?.addEventListener('click', () => {
     }else{
         completedTasks--
     }
-    if(completedTasks === 3){
+    if(completedTasks === 3 && project !==undefined){
         completeBtn.classList.remove('btn-disabled')
         completeBtn.classList.add('btn-primary')
     }
@@ -103,7 +108,8 @@ checkbox2?.addEventListener('click', () => {
     }else{
         completedTasks--
     }
-    if(completedTasks === 3){
+    console.log(project)
+    if(completedTasks === 3 && project !== undefined){
         completeBtn.classList.remove('btn-disabled')
         completeBtn.classList.add('btn-primary')
     }
@@ -119,7 +125,7 @@ checkbox3?.addEventListener('click', () => {
     }else{
         completedTasks--
     }
-    if(completedTasks === 3){
+    if(completedTasks === 3 && project !==undefined ){
         completeBtn.classList.remove('btn-disabled')
         completeBtn.classList.add('btn-primary')
     }else{
@@ -128,8 +134,36 @@ checkbox3?.addEventListener('click', () => {
     }
 })
 
+// Completeing a project 
+
+completeBtn.addEventListener('click',async()=>{
+    console.log(userId)
+
+    try {
+        const res = await fetch(`http://localhost:5000/api/v1/users/completeProject/${userId}`,{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json',
+                'accept':'application/json'
+            }
+        })
+
+        const data =await  res.json()
+        console.log(data)
+
+        alerts.innerHTML = `
+        <div class="alerts">${data?.message}</div>
+        
+        `
+        
+    } catch (error) {
+        
+    }
+
+})
 
 
 
+complete
 
 

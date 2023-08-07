@@ -17,6 +17,10 @@
 const createProjectForm = document.querySelector('.form')
 const alerts = document.querySelector('.alertContainer')
 const addProject = document.querySelector('#addProject')
+const incomplete = document.querySelector('#incompleted')
+const complete = document.querySelector('#completed')
+const allUsers = document.querySelector('#allUsers')
+
 
 const project_name = document.querySelector('#project_name')
 const project_description = document.querySelector('#project_description')
@@ -120,7 +124,7 @@ let project = {
 
 
 //GET ALL PROJECTS
-const fetchProjects = async () => {
+const fetchProjects = async (state=null) => {
 
     try {
 
@@ -133,7 +137,13 @@ const fetchProjects = async () => {
 
     const data = await res.json()
 
+    if (state==null){
+
+    
+
     const projects = await data.projects
+    // filter project
+
 
 
     let html = ``
@@ -153,6 +163,81 @@ const fetchProjects = async () => {
         `
     })
     projectList.innerHTML = html
+
+}
+if (state == false){
+
+     
+
+    const projects = await data.projects
+
+
+    // filter project
+
+    const incompleteProjects = projects.filter((project)=>{
+        return project.completed === state
+    })
+
+    console.log(incompleteProjects)
+
+
+
+    let html = ``
+
+    incompleteProjects.map((project)=>{
+        html += `
+        <div class=${project.isAssigned ? "asigned" : "projectContainer" } id=${project.id}>
+        <h3>${project.project_name}</h3>
+        <p>${project.project_description}</p>
+        <p>${project.created_at}</p>
+        <div class="actions">
+        <button class="action-btn-update">Update</button>
+        <button class="action-btn"  >Assign</button>
+        <button class="action-btn-delete">Delete</button>
+        </div> 
+        </div>
+        `
+    })
+    projectList.innerHTML = html
+
+}
+if(state==true){
+
+        
+
+    const projects = await data.projects
+
+
+    // filter project
+
+    const completeProjects = projects.filter((project)=>{
+        return project.completed === state
+    })
+    console.log(completeProjects)
+
+
+
+    let html = ``
+
+    completeProjects.map((project)=>{
+        html += `
+        <div class=${project.isAssigned ? "asigned" : "projectContainer" } id=${project.id}>
+        <h3>${project.project_name}</h3>
+        <p>${project.project_description}</p>
+        <p>${project.created_at}</p>
+        <div class="actions">
+        <button class="action-btn-update">Update</button>
+        <button class="action-btn"  >Assign</button>
+        <button class="action-btn-delete">Delete</button>
+        </div> 
+        </div>
+        `
+    })
+    projectList.innerHTML = html
+
+}
+
+
 
     } catch (error) {
         
@@ -208,6 +293,20 @@ projectList.addEventListener('click', async(e)=>{
         window.location.href = `../admin-dashboard/assign/index.html?id=${id}`
     }
 
+})
+
+complete.addEventListener('click',()=>{
+
+    fetchProjects(true)
+
+})
+
+incomplete.addEventListener('click',()=>{
+    fetchProjects(false)
+})
+
+allUsers.addEventListener('click',()=>{
+    window.location.href = '../admin-dashboard/users/index.html';
 })
 
 
