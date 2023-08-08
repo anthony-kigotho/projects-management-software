@@ -121,7 +121,7 @@ body{
     height: 90vh;
 }
 
-@media screen and (max-width: 412px) {
+@media screen and (max-width: 692px) {
     .mainContainer{
         display:flex;
         flex-direction: column;

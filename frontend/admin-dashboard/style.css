@@ -57,8 +57,8 @@ align-items: center;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    /* overflow-y: hidden;
+    overflow-x: hidden; */
 
 }
  /* Add Taks styles */
@@ -177,7 +177,7 @@ textarea.form-control {
     gap: 1vh 1vh;
     cursor: pointer;
     position: relative;
-    overflow: hidden; /* Add this to hide the pseudo-element overflow */
+    overflow: hidden;
 }
 
 /* styles when task is asigned */
@@ -325,10 +325,54 @@ textarea.form-control {
     
   */
 
+  @media screen and (max-width: 692px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+    }
 
+    .addProject .container{
+        width: 90%;
+    }
+
+    .form {
+        width: 100%;
+    }
+
+    #project_name, #project_description {
+        width: 100%;
+    }
+
+    .sideBar {
+        margin-top: 30px;
+    }
+
+    .menu {
+        padding: 20px 0;
+    }
+
+    .sideBarBtns {
+        width: 80vw;
+    }
+
+    .projectList {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .projectContainer, .asigned {
+        width: 95%;
+        margin-bottom: 30px;
+    }
+
+    .actions button {
+        width: 150px;
+    }
+  }
 
 /* Responsive styles */
-@media screen and (max-width: 412px) {
+/* @media screen and (max-width: 412px) {
 
     body{
         display: flex;
@@ -461,4 +505,4 @@ textarea.form-control {
     }
 
     
-}
+} */

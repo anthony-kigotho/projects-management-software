@@ -28,9 +28,9 @@ const fetchProjectById = async() => {
 
         html += `
         <div class=${project?.isAssigned?"projectDisabled":"project"}>
-        <h5 class="name">${project.project_name}</h5>
-        <p class="desc">${project.project_description}</p>
-        <p class="deadline"> <span class="date"> Date Added </span> ${new Date(project.created_at).toDateString()}</p>
+        <h5 class="name">${project?.project_name}</h5>
+        <p class="desc">${project?.project_description}</p>
+        <p class="deadline"> <span class="date"> Date Added </span> ${new Date(project?.created_at).toDateString()}</p>
         <li class="dropdown">
         <button href="#" class="btn-primary">Choose User</button>
         <ul class="dropdown-menu">
@@ -93,59 +93,78 @@ try {
     
 }
 }
+let date ='';
+
+const dateForm = document.querySelector('.dateForm')
+const dateInput = document.querySelector('#dateInput')
 
 
-
-projectContainer.addEventListener('click', async(e)=>{
-
+projectContainer.addEventListener('click', (e)=>{
+    
     if(e.target.classList.contains('user')){
-
+        openModal(); 
+        
         //create an alert that takes in a date 
-        const date = prompt('Enter a date for the user to complete the project')
+        // const date = prompt('Enter a date for the user to complete the project')
 
-        const assignDetails = {
-            user_id: e.target.id,
-            deadline:date
-        }
+        dateForm.addEventListener('submit', async (event)=> {
+            event.preventDefault();
+            date = dateInput.value;
+
+            const assignDetails = {
+                user_id: e.target.id,
+                deadline:date
+            }
+            try {
+                const res = await fetch(`http://localhost:5000/api/v1/projects/assign/${projectId}`,{
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': 'application/json'
+        
+        
+                    },
+                    body: JSON.stringify(assignDetails)
+        
+                })
+                const data = await res.json()
+        
+                console.log(data)
+        
+                alerts.innerHTML = `
+                <div class="alerts">${data.msg} . An email has been sent to ${e.target.name} </div>
+                `
+                closeModal();
+                setTimeout(()=>{
+                    alerts.innerHTML =''
+                     window.location.href = '../../admin-dashboard/index.html'
+                },3000)
+                
+            } catch (error) {
+    
+                  
+                alerts.innerHTML = `
+                <div class="alerts">${error.message}</div>
+                `
+                setTimeout(()=>{
+                    alerts.innerHTML =''
+                },3000)
+                
+            }
+        })
 
     
-        try {
-            const res = await fetch(`http://localhost:5000/api/v1/projects/assign/${projectId}`,{
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'accept': 'application/json'
-    
-    
-                },
-                body: JSON.stringify(assignDetails)
-    
-            })
-            const data = await res.json()
-    
-            console.log(data)
-    
-            alerts.innerHTML = `
-            <div class="alerts">${data.msg} . An email has been sent to ${e.target.name} </div>
-            `
-            setTimeout(()=>{
-                alerts.innerHTML =''
-                 window.location.href = '../../admin-dashboard/index.html'
-            },3000)
-            
-        } catch (error) {
-
-              
-            alerts.innerHTML = `
-            <div class="alerts">${error.message}</div>
-            `
-            setTimeout(()=>{
-                alerts.innerHTML =''
-            },3000)
-            
-        }
-
  
     }
 
 })
+
+ // Function to open the modal
+ function openModal() {
+    document.getElementById("dateModal").style.display = "block";
+}
+
+// Function to close the modal
+function closeModal() {
+    document.getElementById("dateModal").style.display = "none";
+}

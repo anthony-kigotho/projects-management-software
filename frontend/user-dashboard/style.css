@@ -237,9 +237,34 @@ input[type="checkbox"]{
     color:  rgb(43, 53, 80);
 }
 
+@media screen and (max-width: 692px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+    }
 
+    .profile {
+        width: 100%;
+    }
 
-@media screen and (max-width: 412px) {
+    .profileDesc, .projectDesc {
+        width: 100%;
+    }
+
+    .profileDesc {
+        padding: 10px;
+    }
+
+    .projectContainer {
+        width: 80%;
+    }
+    .tasks {
+        margin: 30px 0;
+        width: 90%;
+    }
+}
+
+/* @media screen and (max-width: 692px) {
     .main{
         width: 90vw;
         height: 90vh;
@@ -331,4 +356,4 @@ input[type="checkbox"]{
  
 
 
-}
+} */
